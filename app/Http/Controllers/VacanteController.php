@@ -13,7 +13,7 @@ class VacanteController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize("viewAny", Vacante::class);
         return view('vacantes.index');
     }
 
@@ -22,7 +22,7 @@ class VacanteController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize("create", Vacante::class);
         return view("vacantes.create");
     }
 

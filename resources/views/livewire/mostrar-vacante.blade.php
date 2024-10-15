@@ -23,14 +23,27 @@
         </div>
     </div>
 
-    <div>
-        <div>
-            <img src="{{ asset("storage/vacantes/" . $vacante->imagen) }}" alt="{{"Imagen Vacante" . $vacante->titulo}}">
+    <div class="md:grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1">
+            <img src="{{ asset("storage/public/vacantes/" . $vacante->imagen) }}" alt="{{"Imagen Vacante" . $vacante->titulo}}">
         </div>
 
-        <div>
+        <div class="md:col-span-2">
             <h2 class="text-2xl font-bold mb-5">Descripción de Puesto</h2>
             <p>{{$vacante->descripcion}}</p>
         </div>
     </div>
+
+    @guest
+        <div class="mt-5 bg-gray-50 border border-dahs p-5 text-center">
+            <p>
+                ¿Deseas Postularte? 
+                <a class="font-bold text-indigo-600" href="{{route("register")}}">Obtener una Cuenta para poder Aplicar</a>
+            </p>
+        </div>
+    @endguest
+
+    @cannot("create", App\Model\Vacante::class)
+        <livewire:postular-vacante :vacante="$vacante" />
+    @endcannot
 </div>

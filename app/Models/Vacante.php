@@ -31,4 +31,14 @@ class Vacante extends Model
     {
         return $this->belongsTo(Salario::class);
     }
+
+    public function candidatos()
+    {
+        return $this->hasMany(Candidato::class)->orderBy("created_at", "DESC");
+    }
+
+    public function reclutador()
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
 }
